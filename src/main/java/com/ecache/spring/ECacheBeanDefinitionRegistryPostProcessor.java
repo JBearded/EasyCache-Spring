@@ -1,4 +1,4 @@
-package com.yy.ecache.spring;
+package com.ecache.spring;
 
 import com.ecache.proxy.CacheInterceptor;
 import org.springframework.beans.BeansException;

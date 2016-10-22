@@ -1,4 +1,4 @@
-package com.yy.ecache.spring;
+package com.ecache.spring;
 
 import com.ecache.bean.InjectorInterface;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
