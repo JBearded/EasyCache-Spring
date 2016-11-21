@@ -2,10 +2,6 @@ package com.ecache.spring;
 
 import com.ecache.bean.BeanFactoryInterface;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 /**
  * @author 谢俊权
@@ -39,7 +35,7 @@ public class ECacheBeanFactory implements BeanFactoryInterface{
 
     @Override
     public <T> T get(Class<?> clazz) {
-        return get(clazz, null);
+        return get(clazz, clazz.getName());
     }
 
     @Override
@@ -54,21 +50,5 @@ public class ECacheBeanFactory implements BeanFactoryInterface{
         }
         T bean = (T) beanFactory.getSingleton(beanId);
         return (bean == null) ? (T)beanFactory.getBean(clazz) : bean;
-    }
-
-    private String getBeanId(Class<?> clazz){
-        Controller controller = clazz.getAnnotation(Controller.class);
-        Service service = clazz.getAnnotation(Service.class);
-        Repository repository = clazz.getAnnotation(Repository.class);
-        Component component = clazz.getAnnotation(Component.class);
-        String id = (controller != null && !"".equals(controller.value())) ? controller.value() : (
-                (service != null && !"".equals(service.value())) ? service.value() : (
-                        (repository != null && !"".equals(repository.value())) ? repository.value() : (
-                                (component != null && !"".equals(component.value())) ? component.value() : null
-
-                        )
-                )
-        );
-        return (id == null) ? clazz.getName() : id;
     }
 }
